@@ -1,51 +1,45 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../redux/slices/ordersSlice";
 
 const Orders = () => {
+  const [isLoading, setIsLoading] = useState(false); // Para manejar el estado de carga
   const dispatch = useDispatch();
-  const { orders, status, error } = useSelector((state) => state.orders);
+  const { orders, error } = useSelector((state) => state.orders);
 
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchOrders());
-    }
-  }, [status, dispatch]);
-
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (status === "failed") {
-    return <p>Error: {error}</p>;
-  }
-
-  if (!Array.isArray(orders) || orders.length === 0) {
-    return <p>No orders found.</p>;
-  }
+  // Función que se llama al hacer clic en el botón
+  const handleLoadOrders = () => {
+    setIsLoading(true); // Marca como cargando
+    dispatch(fetchOrders()) // Llama a la acción que hace el GET
+      .finally(() => setIsLoading(false)); // Termina el estado de carga
+  };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Orders</h2>
-      <ul className="space-y-2">
-        {orders.map((order) => (
-          <li
-            key={order.id}
-            className="p-4 border rounded shadow-sm hover:shadow-md transition"
-          >
-            <p><strong>ID:</strong> {order.id}</p>
-            <p><strong>Total:</strong> ${order.total}</p>
-            <p><strong>Status:</strong> {order.status}</p>
-            <p><strong>Payment ID:</strong> {order.paymentId}</p>
-            <p>
-              <strong>Order Items:</strong>{" "}
-              {order.orderItems.length > 0
-                ? order.orderItems.join(", ")
-                : "No items"}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <h1>Orders</h1>
+      <button onClick={handleLoadOrders} disabled={isLoading}>
+        {isLoading ? "Loading..." : "Load Orders"}
+      </button>
+
+      {error && <div>Error: {error}</div>}
+
+      {/* Mostrar mensaje si no hay órdenes */}
+      {orders.length === 0 && !isLoading && (
+        <div>No orders found. Please load them.</div>
+      )}
+
+      {/* Mostrar las órdenes si las hay */}
+      {orders.length > 0 && (
+        <ul>
+          {orders.map((order) => (
+            <li key={order.id}>
+              <p><strong>Order ID:</strong> {order.id}</p>
+              <p><strong>Total:</strong> {order.total}</p>
+              <p><strong>Status:</strong> {order.status}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
