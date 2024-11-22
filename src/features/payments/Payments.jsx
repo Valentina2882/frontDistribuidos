@@ -45,13 +45,13 @@ const Payments = () => {
     }
   };
 
-  if (status === "loading") return <p className="text-center text-lg font-semibold text-gray-500">Cargando pagos...</p>;
+  if (status === "loading") return <p className="text-center text-lg font-semibold text-black">Cargando pagos...</p>;
   if (status === "failed") return <p className="text-center text-lg font-semibold text-red-500">Error: {error}</p>;
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-teal-100 flex flex-col items-center py-10">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-11/12 sm:w-3/4 lg:w-2/3">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Lista de Pagos</h2>
+        <h2 className="text-3xl font-bold text-black mb-6 text-center">Lista de Pagos</h2>
 
         {/* Mensaje de estado */}
         {message && (
@@ -63,20 +63,20 @@ const Payments = () => {
         {/* Formulario para agregar pago */}
         <form onSubmit={handleSubmit} className="space-y-4 mb-6">
           <div>
-            <label htmlFor="amount" className="block text-lg font-medium text-gray-700">
+            <label htmlFor="amount" className="block text-lg font-medium text-black">
               Monto:
             </label>
             <input
               type="number"
               id="amount"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              onChange={(e) => setAmount(parseFloat(e.target.value) || "")}
+              className="w-full p-2 border rounded-md text-black bg-white"
               required
             />
           </div>
           <div>
-            <label htmlFor="method" className="block text-lg font-medium text-gray-700">
+            <label htmlFor="method" className="block text-lg font-medium text-black">
               Método de Pago:
             </label>
             <input
@@ -84,7 +84,7 @@ const Payments = () => {
               id="method"
               value={method}
               onChange={(e) => setMethod(e.target.value)}
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 border rounded-md text-black bg-white"
               required
             />
           </div>
@@ -100,7 +100,7 @@ const Payments = () => {
 
         {/* Mensaje cuando no hay pagos */}
         {payments.length === 0 && (
-          <div className="text-center text-gray-600 italic mb-6">
+          <div className="text-center text-black italic mb-6">
             No se encontraron pagos.
           </div>
         )}
@@ -115,13 +115,13 @@ const Payments = () => {
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-semibold text-lg text-gray-800">
+                    <p className="font-semibold text-lg text-black">
                       <strong>ID:</strong> <span className="text-blue-500">{payment.id}</span>
                     </p>
-                    <p className="text-gray-700 mt-2">
+                    <p className="text-black mt-2">
                       <strong>Monto:</strong> ${payment.amount.toFixed(2)}
                     </p>
-                    <p className="text-gray-700 mt-2">
+                    <p className="text-black mt-2">
                       <strong>Método:</strong> {payment.method}
                     </p>
                   </div>

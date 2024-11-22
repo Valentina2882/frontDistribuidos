@@ -115,7 +115,7 @@ const Products = () => {
                 name="name"
                 value={name}
                 onChange={handleInputChange}
-                className="w-full p-4 border-2 border-gray-300 rounded-lg mt-2"
+                className="w-full p-4 border-2 border-gray-400 rounded-lg mt-2 text-gray-800"
                 required
               />
             </div>
@@ -129,7 +129,7 @@ const Products = () => {
                 name="description"
                 value={description}
                 onChange={handleInputChange}
-                className="w-full p-4 border-2 border-gray-300 rounded-lg mt-2"
+                className="w-full p-4 border-2 border-gray-400 rounded-lg mt-2 text-gray-800"
                 required
               />
             </div>
@@ -143,7 +143,7 @@ const Products = () => {
                 name="price"
                 value={price}
                 onChange={handleInputChange}
-                className="w-full p-4 border-2 border-gray-300 rounded-lg mt-2"
+                className="w-full p-4 border-2 border-gray-400 rounded-lg mt-2 text-gray-800"
                 required
               />
             </div>
@@ -157,7 +157,7 @@ const Products = () => {
                 name="stock"
                 value={stock}
                 onChange={handleInputChange}
-                className="w-full p-4 border-2 border-gray-300 rounded-lg mt-2"
+                className="w-full p-4 border-2 border-gray-400 rounded-lg mt-2 text-gray-800"
                 required
               />
             </div>
@@ -171,7 +171,7 @@ const Products = () => {
                 name="category"
                 value={category}
                 onChange={handleInputChange}
-                className="w-full p-4 border-2 border-gray-300 rounded-lg mt-2"
+                className="w-full p-4 border-2 border-gray-400 rounded-lg mt-2 text-gray-800"
                 required
               />
             </div>
