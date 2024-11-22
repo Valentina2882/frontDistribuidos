@@ -1,17 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// URL de la API de productos
 const apiUrl = "http://localhost:3300/products/";
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
   const response = await axios.get(apiUrl);
-  return response.data.products; // Devuelve los productos
+  return response.data.products;
 });
 
 export const fetchProductsByIds = createAsyncThunk("products/fetchProductsByIds", async (productIds) => {
   const response = await axios.post(`${apiUrl}getByIds`, { productIds });
-  return response.data.products; // Devuelve los productos filtrados
+  return response.data.products;
 });
 
 const productsSlice = createSlice({
@@ -29,7 +28,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.products = action.payload; // Asigna los productos
+        state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
@@ -40,7 +39,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductsByIds.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.products = action.payload; // Asigna los productos filtrados
+        state.products = action.payload;
       })
       .addCase(fetchProductsByIds.rejected, (state, action) => {
         state.status = "failed";
